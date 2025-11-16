@@ -35,16 +35,19 @@ for folder_name in os.listdir(input_base_folder):
     output_gif_path = os.path.join(output_base_folder, f"{folder_name}.gif")
 
     # Save as high-quality GIF
+    dura = [50] * len(images)  # Match video speed (50 FPS (GIF-safe))
     images[0].save(
         output_gif_path,
         save_all=True,
         append_images=images[1:],
-        duration=33,  # Match video speed (30 FPS)
+        duration=dura,  
         loop=0,  # Loop forever
         optimize=True,  # Reduce file size without loss
         disposal=2,  # Ensures frames don’t blend incorrectly
+        optimize=False, 
     )
 
     print(f"High-quality GIF created: {output_gif_path}")
 
 print("All GIFs have been created successfully!")
+
